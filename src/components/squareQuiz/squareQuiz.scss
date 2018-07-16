@@ -1,0 +1,65 @@
+
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
+* {
+    box-sizing: border-box;
+    font-family: 'Raleway';
+}
+
+.quiz-container{
+    margin: 15px auto;
+    width: 100%;
+    padding-top: 100%;
+    border: 1px solid black;
+    position: relative;
+    max-width: 800px;
+    
+    @media screen and (min-width: 800px){
+        width: 700px;
+        height: 700px;
+        padding-top: 0;
+    }
+
+    .solution {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.75);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2;
+
+        p {
+            color: white;
+            font-size: 35px;
+            text-align: center;
+        }
+    }
+
+    .square-container{
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        flex-wrap: wrap;
+
+
+        .square {
+            background-color: #FF0F0F;
+            border: 1px solid black;
+            cursor: pointer;
+
+            &.selected{
+                background-color: #279E30;
+            }
+        }
+    }
+
+
+   
+}
