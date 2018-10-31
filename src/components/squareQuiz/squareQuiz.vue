@@ -22,6 +22,7 @@
 
       <button @click="startGame">Game starten</button>
       <button @click="solveGame">Game auflösen</button>
+      <h1>Übrig: {{Number(maxSelectable) - numberOfSelected}}</h1>
     <div class="quiz-container">
       <div class="solution" v-if="gameFinished">
         <p>Du hast {{rightSolution}} von {{selectables.length}} richtig!</p>
@@ -36,5 +37,4 @@
 <script src="./squareQuiz.js">
 </script>
 <style src="./squareQuiz.scss" lang="scss" scoped>
-
 </style>

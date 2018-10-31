@@ -1,6 +1,8 @@
+/* eslint-disable */
+
 export default {
   name: 'squareQuiz',
-  data () {
+  data() {
     return {
       selected: '',
       maxSelectable: '',
@@ -9,71 +11,86 @@ export default {
       solutionShowing: false,
       rightSolution: '',
       gameFinished: false
-    }
+    };
   },
-  created () {
-  },
+  created() {},
   methods: {
-    startGame () {
+    startGame() {
       this.gameFinished = false;
-      this.generateSquares()
-      this.generateSelectables()
+      this.generateSquares();
+      this.generateSelectables();
     },
-    generateSquares () {
-      this.squares = []
-      const generateSquares = this.selected * this.selected
+    generateSquares() {
+      this.squares = [];
+      const generateSquares = this.selected * this.selected;
       for (let i = 0; i < generateSquares; i++) {
-        const squareStyle = 'width: ' + (100 / this.selected) + '%; height: ' + (100 / this.selected) + '%;'
-        this.squares.push({id: i, selected: false, style: squareStyle})
+        const squareStyle =
+          'width: ' +
+          100 / this.selected +
+          '%; height: ' +
+          100 / this.selected +
+          '%;';
+        this.squares.push({ id: i, selected: false, style: squareStyle });
       }
     },
-    selectSquare (index) {
+    selectSquare(index) {
       if (this.solutionShowing === false) {
         switch (this.squares[index].selected) {
           case false:
-            this.setTrue(index)
-            break
+            this.setTrue(index);
+            break;
           case true:
-            this.setFalse(index)
-            break
+            this.setFalse(index);
+            break;
         }
       }
     },
-    setFalse (index) {
-      this.squares[index].selected = false
+    setFalse(index) {
+      this.squares[index].selected = false;
     },
-    setTrue (index) {
-      if (this.squares.filter(item => item.selected === true).length < this.selectables.length) {
-        this.squares[index].selected = true
+    setTrue(index) {
+      if (
+        this.squares.filter(item => item.selected === true).length <
+        this.selectables.length
+      ) {
+        this.squares[index].selected = true;
       }
     },
-    generateSelectables () {
-      this.selectables = []
+    generateSelectables() {
+      this.selectables = [];
       for (let i = 0; i < this.maxSelectable; i++) {
-        this.selectables.push(Math.floor(Math.random() * (this.selected * this.selected - 1)) + 0)
+        this.selectables.push(
+          Math.floor(Math.random() * (this.selected * this.selected - 1)) + 0
+        );
       }
-      this.showSolution()
+      this.showSolution();
     },
-    showSolution () {
-      this.solutionShowing = true
+    showSolution() {
+      this.solutionShowing = true;
       for (let i = 0; i < this.selectables.length; i++) {
-        this.squares[this.selectables[i]].selected = true
+        this.squares[this.selectables[i]].selected = true;
       }
       setTimeout(() => {
-        this.solutionShowing = false
+        this.solutionShowing = false;
         this.squares.forEach(element => {
-          element.selected = false
-        })
-      }, 2000)
+          element.selected = false;
+        });
+      }, 2000);
     },
-    solveGame () {
-      this.rightSolution = 0
+    solveGame() {
+      this.rightSolution = 0;
       for (let i = 0; i < this.selectables.length; i++) {
         if (this.squares[this.selectables[i]].selected) {
-          this.rightSolution++
+          this.rightSolution++;
         }
       }
       this.gameFinished = true;
     }
+  },
+  computed: {
+    numberOfSelected() {
+      console.log(this.squares.filter(sqr => sqr.selected).length);
+      return this.squares.filter(sqr => sqr.selected).length;
+    }
   }
-}
+};
